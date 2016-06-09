@@ -1,4 +1,4 @@
-App Name
+App Namee
 boldsunshine
 Client Id
 5136742eca3237e5f0a664f0725b8ba1
