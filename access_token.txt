@@ -1,0 +1,8 @@
+App Name
+boldsunshine
+Client Id
+5136742eca3237e5f0a664f0725b8ba1
+Client Secret
+403ad9c452b485732a9a9779d3400c2bfc0b3d65f86011e25f7572eab1e32a4d
+Access Token
+93de1ea75063ca3c270e17cc11d97897
