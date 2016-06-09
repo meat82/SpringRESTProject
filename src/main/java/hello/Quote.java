@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Quote {
     private String type;
-    private Value value;
+    private Player player;
 
     public Quote() {
     }
@@ -18,19 +18,19 @@ public class Quote {
         this.type = type;
     }
 
-    public Value getValue() {
-        return value;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setValue(Value value) {
-        this.value = value;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     @Override
     public String toString() {
         return "Quote{" +
                 "type='" + type + '\'' +
-                ", value=" + value +
+                ", player=" + player +
                 '}';
     }
 }

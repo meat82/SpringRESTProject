@@ -1,8 +1,5 @@
 package hello;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -15,9 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class Application implements CommandLineRunner{
+public class Application implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
+
+    private static final String TOKEN_ID = "93de1ea75063ca3c270e17cc11d97897";
+    private static final String CONTENT_TYPE = "application/json";
+    private static final String ACCEPT = "application/vnd.stattleship.com; version=1";
+    private static final String URL = "https://www.stattleship.com/hockey/nhl/players";
+    private static final String SELECT_TEAM = "nhl-bos";
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -27,18 +30,24 @@ public class Application implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
         HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.set("Content-Type", "application/json");
-        requestHeaders.set("Authorization", "Token token=93de1ea75063ca3c270e17cc11d97897");
-        requestHeaders.set("Accept", "application/vnd.stattleship.com; version=1");
+        StringBuilder url_builder = new StringBuilder(URL);
+        url_builder.append("?").append("team_id").append("=").append(SELECT_TEAM);
+        
+        requestHeaders.set(HttpHeaders.CONTENT_TYPE, CONTENT_TYPE);
+        requestHeaders.set(HttpHeaders.AUTHORIZATION, TOKEN_ID);
+        requestHeaders.set(HttpHeaders.ACCEPT, ACCEPT);
         HttpEntity<String> entity = new HttpEntity<String>("parameters", requestHeaders);
+
         RestTemplate restTemplate = new RestTemplate();
-        //Quote quote = restTemplate.getForObject("https://www.stattleship.com/hockey/nhl/players", Quote.class);
-        Map<String, String> urlVariables = new HashMap<String,String>();
-        urlVariables.put("team_id", "nhl-bos");
-        //Quote quote = restTemplate.getForObject("https://www.stattleship.com/hockey/nhl/players", Quote.class, urlVariables);
-        ResponseEntity<String> response = restTemplate.exchange("https://www.stattleship.com/hockey/nhl/players?team_id=nhl-bos", HttpMethod.GET, entity, String.class);
-        log.info(response.toString());        
+        ResponseEntity<Players> response = restTemplate.exchange(
+                url_builder.toString(), HttpMethod.GET, entity,
+                Players.class);
+        Players players = response.getBody();
+        //Just loop through player from selected team
+        for (Player player : players.getPlayers()) {
+            log.info(player.toString());
+        }
+
     }
-    
 
 }
