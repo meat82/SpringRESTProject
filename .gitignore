@@ -1,0 +1,10 @@
+# global patterns
+.gradle
+.settings
+.project
+.classpath
+gradle.properties
+
+# patterns for project root directory
+/bin
+/build
