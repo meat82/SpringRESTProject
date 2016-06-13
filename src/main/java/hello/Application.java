@@ -43,6 +43,7 @@ public class Application implements CommandLineRunner {
                 url_builder.toString(), HttpMethod.GET, entity,
                 Players.class);
         Players players = response.getBody();
+        
         //Just loop through player from selected team
         for (Player player : players.getPlayers()) {
             log.info(player.toString());
