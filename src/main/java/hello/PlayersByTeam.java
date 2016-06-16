@@ -16,7 +16,6 @@ public class PlayersByTeam extends AbstractREST{
 
     private static final Logger log = LoggerFactory.getLogger(PlayersByTeam.class);
     
-    public String url;
     public Players players;
     
     
@@ -26,25 +25,12 @@ public class PlayersByTeam extends AbstractREST{
         players = new Players();
     }
     
-    public String getURL() {
-        return url;
-    }
-    public void setURL(String url) {
-        this.url = url;
-    }
     public List<Player> getPlayerByTeam(String team) {
         setSelectTeam(team);
-        HttpHeaders requestHeaders = new HttpHeaders();
         StringBuilder url_builder = new StringBuilder(getURL());
         url_builder.append("?").append("team_id").append("=").append(getSelectTeam());
-
-        requestHeaders.set(HttpHeaders.CONTENT_TYPE, getContentType());
-        requestHeaders.set(HttpHeaders.AUTHORIZATION, getTokenID());
-        requestHeaders.set(HttpHeaders.ACCEPT, getAccept());
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", requestHeaders);
-
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Players> response = restTemplate.exchange(url_builder.toString(), HttpMethod.GET, entity,
+        ResponseEntity<Players> response = restTemplate.exchange(url_builder.toString(), HttpMethod.GET, constructHTTPHeader(),
                 Players.class);
         players = response.getBody();
         return players.getPlayers();

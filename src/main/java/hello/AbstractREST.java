@@ -7,6 +7,8 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 
 public abstract class AbstractREST {
 
@@ -15,15 +17,34 @@ public abstract class AbstractREST {
     private String contentType;
     private String accept;
     private String selectTeam;
+    public String url;
     
     public AbstractREST(String token) {
         setTokenID(token);
         setContentType("application/json");
         setAccept("application/vnd.stattleship.com; version=1");
         setSelectTeam("");
-
+        setURL("");
     }
+    
+    public final HttpEntity<String> constructHTTPHeader() {
+
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.set(HttpHeaders.CONTENT_TYPE, getContentType());
+        requestHeaders.set(HttpHeaders.AUTHORIZATION, getTokenID());
+        requestHeaders.set(HttpHeaders.ACCEPT, getAccept());
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", requestHeaders);
+        return entity;
+    }
+    
     public abstract void displayData();
+    
+    public String getURL() {
+        return url;
+    }
+    public void setURL(String url) {
+        this.url = url;
+    }
     
     public String getTokenID() {
         return tokenID;
