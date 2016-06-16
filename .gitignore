@@ -4,6 +4,7 @@
 .project
 .classpath
 gradle.properties
+security.key
 
 # patterns for project root directory
 /bin
