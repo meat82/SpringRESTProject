@@ -10,7 +10,13 @@ public class Player {
     private String last_name;
     
     private String humanized_salary;
-
+    
+    public Player() {   
+        first_name = "";
+        last_name = "";
+        humanized_salary = "";
+    }
+    
     public String getLast_name() {
         return last_name;
     }

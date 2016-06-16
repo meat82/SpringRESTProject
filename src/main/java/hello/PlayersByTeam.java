@@ -14,16 +14,16 @@ import org.springframework.web.client.RestTemplate;
 
 public class PlayersByTeam extends AbstractREST{
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger log = LoggerFactory.getLogger(PlayersByTeam.class);
     
     public String url;
-    public List<Player> players;
+    public Players players;
     
     
     public PlayersByTeam(String token) {
         super(token);
         setURL("https://www.stattleship.com/hockey/nhl/players");
-        players = new ArrayList<Player>();
+        players = new Players();
     }
     
     public String getURL() {
@@ -46,15 +46,14 @@ public class PlayersByTeam extends AbstractREST{
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Players> response = restTemplate.exchange(url_builder.toString(), HttpMethod.GET, entity,
                 Players.class);
-        Players players = response.getBody();
-
+        players = response.getBody();
         return players.getPlayers();
     }
 
     @Override
     public void displayData() {
         // Just loop through player from selected team
-        for (Player player : players) {
+        for (Player player : players.getPlayers()) {
             log.info(player.toString());
         }
         

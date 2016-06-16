@@ -30,7 +30,7 @@ public class Application implements CommandLineRunner {
 	    
 		init(args);
 		String securityToken = properties.getProperty("key");
-		
+		log.info("User token: " + securityToken);
 		PlayersByTeam pbt = new PlayersByTeam(securityToken);
 		if (args != null && args.length > 0) {
 			for (String arg : args) {
@@ -40,6 +40,7 @@ public class Application implements CommandLineRunner {
 			}
 		}
 		else {
+		    log.info("Display team: " + SELECT_TEAM);
             pbt.getPlayerByTeam(SELECT_TEAM);
             displayRESTData(pbt);
 		}
