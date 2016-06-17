@@ -16,11 +16,11 @@ Following softwares are required:
 
 1) Get own security token from https://www.stattleship.com/
 
-2) Go to project root and run: gradle createJAR
+2) Add security token into security.key file
 
-3) Executable jar file is created into folder build/libs
+3) Go to project root and run: gradle createJAR
 
-4) Copy security.key in build/libs folder and add security token
+4) Executable jar file is created into folder build/libs
 
 5) Run example: java -jar RestData-1.0.jar nhl-car
 
