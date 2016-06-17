@@ -1,10 +1,5 @@
 package hello;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -27,6 +22,10 @@ public abstract class AbstractREST {
         setURL("");
     }
     
+    /**
+     * 
+     * @return
+     */
     public final HttpEntity<String> constructHTTPHeader() {
 
         HttpHeaders requestHeaders = new HttpHeaders();

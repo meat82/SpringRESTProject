@@ -13,8 +13,8 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-    baseName = 'gs-consuming-rest'
-    version =  '0.1.0'
+    baseName = 'RestData'
+    version =  '1.0'
 }
 
 repositories {
@@ -33,4 +33,10 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
+}
+task createJAR(dependsOn: build) {
+    copy {
+        from 'security.key'
+        into "build/libs"
+    }
 }
