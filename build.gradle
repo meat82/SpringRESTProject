@@ -28,6 +28,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework:spring-web")
     compile("com.fasterxml.jackson.core:jackson-databind")
+    //Uncomment if own libraries are needed
+    //compile fileTree(dir: 'libs', include: '*.jar')
     testCompile("junit:junit")
 }
 

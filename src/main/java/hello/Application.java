@@ -8,6 +8,8 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -26,10 +28,18 @@ public class Application implements CommandLineRunner {
     private String securityToken;
 	
 	public static void main(String[] args) {
+	    String mikko = "";
+	    
 		SpringApplication.run(Application.class, args);
 
 	}
 
+	@Autowired
+	public Application(ApplicationArguments args) {
+	    boolean debug = args.containsOption("debug");
+	    log.info("debug: " + debug);
+    }
+	
 	@Override
 	public void run(String... args) throws Exception {
 	    
