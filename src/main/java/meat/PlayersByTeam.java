@@ -1,13 +1,9 @@
-package hello;
+package meat;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +17,7 @@ public class PlayersByTeam extends AbstractREST{
     
     public PlayersByTeam(String token) {
         super(token);
-        setURL("https://www.stattleship.com/hockey/nhl/players");
+        setURL("https://api.stattleship.com/hockey/nhl/players");
         players = new Players();
     }
     

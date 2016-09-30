@@ -1,4 +1,4 @@
-package hello;
+package meat;
 
 import java.io.FileInputStream;
 import java.io.IOException;
