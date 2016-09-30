@@ -21,42 +21,41 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 public class Application implements CommandLineRunner {
 
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     private Properties properties;
     private InputStream input;
     private String securityToken;
-	
-	public static void main(String[] args) {
-	    String mikko = "";
-	    
-		SpringApplication.run(Application.class, args);
 
-	}
+    public static void main(String[] args) {
 
-	@Autowired
-	public Application(ApplicationArguments args) {
-	    boolean debug = args.containsOption("debug");
-	    log.info("debug: " + debug);
+        SpringApplication.run(Application.class, args);
+
     }
-	
-	@Override
-	public void run(String... args) throws Exception {
-	    
-		init(args);
-		securityToken = properties.getProperty("key");
-		log.info("User token: " + securityToken);
 
-	}
-	
+    @Autowired
+    public Application(ApplicationArguments args) {
+        boolean debug = args.containsOption("debug");
+        log.info("debug: " + debug);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+
+        init(args);
+        securityToken = properties.getProperty("key");
+        log.info("User token: " + securityToken);
+
+    }
+
     private void init(String[] args) throws IOException {
         properties = new Properties();
         input = new FileInputStream("security.key");
         properties.load(input);
     }
-    
-    @RequestMapping("/show")  
-    public List<Player> showData(@RequestParam(value="team", defaultValue="nhl-car") String selectTeam) {
+
+    @RequestMapping("/show")
+    public List<Player> showData(@RequestParam(value = "team", defaultValue = "nhl-car") String selectTeam) {
         PlayersByTeam pbt = new PlayersByTeam(securityToken);
         return pbt.getPlayerByTeam(selectTeam);
     }
